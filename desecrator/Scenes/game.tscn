@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://tnrlmn60h5ae" path="res://Assets/Graveyard/Graveyard_Set.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://cm34q1mmuo7ft" path="res://Scenes/Player.tscn" id="2_qxrlw"]
 [ext_resource type="Texture2D" uid="uid://bfawqiyyhvmo" path="res://Assets/Light/light.png" id="2_wrm1d"]
-[ext_resource type="AudioStream" uid="uid://djwwtuds166ik" path="res://Assets/Music/Track 03.wav" id="4_3dryh"]
+[ext_resource type="AudioStream" uid="uid://c6tq2pi3iqvf1" path="res://Assets/Music/haunted ambiences.mp3" id="5_wowpa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 texture = ExtResource("1_ebmjs")
@@ -1611,6 +1611,6 @@ position = Vector2(207, 54)
 zoom = Vector2(2.8, 2.8)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_3dryh")
-volume_db = 6.679
+stream = ExtResource("5_wowpa")
+volume_db = 0.835
 autoplay = true
