@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cm34q1mmuo7ft"]
+[gd_scene load_steps=16 format=3 uid="uid://cm34q1mmuo7ft"]
 
 [ext_resource type="Script" uid="uid://cxwepihyxyqv4" path="res://Scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://poognktqd4p7" path="res://Assets/Character/Eris Esra's Character Template 4/16x16/16x16 Idle-Sheet.png" id="1_ymxaj"]
 [ext_resource type="Texture2D" uid="uid://cj1vvot0ql26h" path="res://Assets/Character/Eris Esra's Character Template 4/16x16/16x16 Walk-Sheet.png" id="3_gntrk"]
+[ext_resource type="Texture2D" uid="uid://bfawqiyyhvmo" path="res://Assets/Light/light.png" id="4_dewec"]
+[ext_resource type="Texture2D" uid="uid://cec6b7byhnvhf" path="res://Assets/Light/flashlight copy.png" id="5_5ixxa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88kja"]
 atlas = ExtResource("1_ymxaj")
@@ -85,8 +87,25 @@ scale = Vector2(1.3749999, 1.3749999)
 sprite_frames = SubResource("SpriteFrames_t38ji")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.9144043
+frame_progress = 0.37177998
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_pbj7x")
+
+[node name="flashlight" type="PointLight2D" parent="."]
+position = Vector2(0, -7)
+color = Color(0.78039217, 0.4392157, 0, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("5_5ixxa")
+offset = Vector2(7, 0)
+texture_scale = 1.99
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(0, -7)
+shadow_enabled = true
+texture = ExtResource("4_dewec")
+texture_scale = 0.36

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 100
 @onready var playerSprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var flashlight: PointLight2D = $flashlight
 
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")
@@ -29,3 +30,5 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 	move_and_slide()
+	
+	flashlight.look_at(get_global_mouse_position())
