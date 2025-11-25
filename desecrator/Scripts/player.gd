@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 100
 @onready var playerSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flashlight: PointLight2D = $flashlight
+@export var flashlightEnabled = true
 
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")
@@ -21,14 +22,27 @@ func _physics_process(delta: float) -> void:
 		
 	# Apply Movement
 	if direction_x != 0:
-		velocity.x = direction_x * SPEED
+		velocity.x = direction_x
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	if direction_y != 0:
-		velocity.y = direction_y * SPEED
+		velocity.y = direction_y
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+		
+	var newVelocity = velocity.normalized() * SPEED # Diagonal movement makes you faster, this stops it.
+	velocity = newVelocity
 	move_and_slide()
 	
-	flashlight.look_at(get_global_mouse_position())
+	if flashlightEnabled:
+		flashlight.enabled = true
+		flashlight.look_at(get_global_mouse_position())
+	else:
+		flashlight.enabled = false
+	
+	
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ActionOne"):
+		flashlightEnabled = !flashlightEnabled # Probably better to just disable it here but nahhhhhhhhhhhhh
