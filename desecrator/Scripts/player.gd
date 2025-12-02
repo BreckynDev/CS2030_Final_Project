@@ -5,9 +5,21 @@ const SPEED = 100
 @onready var flashlight: PointLight2D = $flashlight
 @export var flashlightEnabled = true
 
+# Footstep sounds
+@onready var footstepPlayer: AudioStreamPlayer2D = $FootstepPlayer
+@export var footstep_sounds: Array[AudioStream] = []
+
+# Footstep timer
+var footstep_cooldown := 0.5
+var footstep_timer := 0.0
+
+
+
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")
 	var direction_y := Input.get_axis("move_up", "move_down")
+	
+	footstep_timer -= delta
 	
 	# Flip sprite
 	if direction_x > 0:
@@ -19,6 +31,9 @@ func _physics_process(delta: float) -> void:
 		playerSprite.play("idle")
 	else:
 		playerSprite.play("walk")
+		if footstep_timer <= 0:
+			play_footstep()
+			footstep_timer = footstep_cooldown
 		
 	# Apply Movement
 	if direction_x != 0:
@@ -42,7 +57,14 @@ func _physics_process(delta: float) -> void:
 		flashlight.enabled = false
 	
 	
-
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ActionOne"):
 		flashlightEnabled = !flashlightEnabled # Probably better to just disable it here but nahhhhhhhhhhhhh
+
+func play_footstep() -> void:
+	if footstepPlayer == null:
+		return
+	if footstep_sounds.size() == 0:
+		return
+	footstepPlayer.stream = footstep_sounds[randi() % footstep_sounds.size()]
+	footstepPlayer.play()

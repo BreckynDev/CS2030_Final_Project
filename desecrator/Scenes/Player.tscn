@@ -1,10 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://cm34q1mmuo7ft"]
+[gd_scene load_steps=20 format=3 uid="uid://cm34q1mmuo7ft"]
 
 [ext_resource type="Script" uid="uid://cxwepihyxyqv4" path="res://Scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://poognktqd4p7" path="res://Assets/Character/Eris Esra's Character Template 4/16x16/16x16 Idle-Sheet.png" id="1_ymxaj"]
+[ext_resource type="AudioStream" uid="uid://cm0a71p665lf0" path="res://Assets/Music/Sound Effects/rustling-grass-1-101282.mp3" id="2_bhhdu"]
 [ext_resource type="Texture2D" uid="uid://cj1vvot0ql26h" path="res://Assets/Character/Eris Esra's Character Template 4/16x16/16x16 Walk-Sheet.png" id="3_gntrk"]
+[ext_resource type="AudioStream" uid="uid://cfslwviw5veg5" path="res://Assets/Music/Sound Effects/rustling-grass-2-101283.mp3" id="3_megsn"]
 [ext_resource type="Texture2D" uid="uid://bfawqiyyhvmo" path="res://Assets/Light/light.png" id="4_dewec"]
+[ext_resource type="AudioStream" uid="uid://byevb2wwx0278" path="res://Assets/Music/Sound Effects/rustling-grass-4-101281.mp3" id="4_yoq75"]
 [ext_resource type="Texture2D" uid="uid://cec6b7byhnvhf" path="res://Assets/Light/flashlight copy.png" id="5_5ixxa"]
+[ext_resource type="AudioStream" uid="uid://ccqjjy26sa2ni" path="res://Assets/Music/Sound Effects/walking-on-grass-363353.mp3" id="5_megsn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88kja"]
 atlas = ExtResource("1_ymxaj")
@@ -80,6 +84,7 @@ radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_kyqiw")
+footstep_sounds = Array[AudioStream]([ExtResource("2_bhhdu"), ExtResource("3_megsn"), ExtResource("4_yoq75"), ExtResource("5_megsn")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0.24999905, -13.750001)
@@ -87,7 +92,6 @@ scale = Vector2(1.3749999, 1.3749999)
 sprite_frames = SubResource("SpriteFrames_t38ji")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.37177998
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -110,3 +114,6 @@ position = Vector2(0, -7)
 shadow_enabled = true
 texture = ExtResource("4_dewec")
 texture_scale = 0.36
+
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -15.47

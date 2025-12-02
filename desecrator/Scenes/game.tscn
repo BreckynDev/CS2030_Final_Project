@@ -1641,7 +1641,7 @@ texture = ExtResource("2_wrm1d")
 texture_scale = 0.15
 
 [node name="Lamp2" type="PointLight2D" parent="YSorted/Lights/Lights/Lamp"]
-position = Vector2(455.00012, 151)
+position = Vector2(455.99997, 150)
 scale = Vector2(7.81523, 5.6282616)
 color = Color(0.78039217, 0.4392157, 0, 1)
 texture = ExtResource("2_wrm1d")
