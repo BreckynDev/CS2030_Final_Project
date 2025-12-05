@@ -82,7 +82,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbj7x"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_kyqiw")
 footstep_sounds = Array[AudioStream]([ExtResource("2_bhhdu"), ExtResource("3_megsn"), ExtResource("4_yoq75"), ExtResource("5_megsn")])
 

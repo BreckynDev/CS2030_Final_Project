@@ -13,11 +13,16 @@ const SPEED = 100
 var footstep_cooldown := 0.5
 var footstep_timer := 0.0
 
-
+#digging
+var current_interactable = null
 
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")
 	var direction_y := Input.get_axis("move_up", "move_down")
+	
+	#detecting if digging
+	if Input.is_action_pressed("dig") and current_interactable:
+		current_interactable.dig(get_physics_process_delta_time())
 	
 	footstep_timer -= delta
 	
