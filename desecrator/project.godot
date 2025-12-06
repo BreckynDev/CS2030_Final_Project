@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Desecrator"
-run/main_scene="uid://5u0brea88mb6"
+run/main_scene="uid://bp7rao7baiaud"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

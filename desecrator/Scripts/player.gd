@@ -4,12 +4,20 @@ const SPEED = 100
 @onready var playerSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flashlight: PointLight2D = $flashlight
 @export var flashlightEnabled = true
+@onready var battery_bar = get_node("/root/Game/UI/BatteryBar")
+@onready var treasure_bar = get_node("/root/Game/UI/TreasureBar")
+
+var treasureGoal = 100
+var treasure = 0
+
+var batteryPower = 100
+@export var batteryDrain := 5.0
 
 # Footstep sounds
 @onready var footstepPlayer: AudioStreamPlayer2D = $FootstepPlayer
 @export var footstep_sounds: Array[AudioStream] = []
 
-# Footstep timer
+# Footstep timer for sound effect
 var footstep_cooldown := 0.5
 var footstep_timer := 0.0
 
@@ -19,6 +27,8 @@ var current_interactable = null
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")
 	var direction_y := Input.get_axis("move_up", "move_down")
+	
+	treasure_bar.value = treasure
 	
 	#detecting if digging
 	if Input.is_action_pressed("dig") and current_interactable:
@@ -57,9 +67,18 @@ func _physics_process(delta: float) -> void:
 	
 	if flashlightEnabled:
 		flashlight.enabled = true
-		flashlight.look_at(get_global_mouse_position())
+		if batteryPower > 0:
+			batteryPower -= batteryDrain  * delta
+		if batteryPower <= 0:
+			batteryPower = 0
+			flashlightEnabled = false
+			flashlight.enabled = false
+		if flashlightEnabled:
+			flashlight.look_at(get_global_mouse_position())
 	else:
 		flashlight.enabled = false
+	
+	battery_bar.value = batteryPower
 	
 	
 func _process(delta: float) -> void:
