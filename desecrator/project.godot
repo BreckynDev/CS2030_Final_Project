@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Desecrator"
-run/main_scene="uid://bp7rao7baiaud"
+run/main_scene="uid://b0vwy8w03yq4t"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [input]
 

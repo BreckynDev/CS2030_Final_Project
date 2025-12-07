@@ -79,10 +79,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pbj7x"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_megsn"]
+size = Vector2(11.25, 7)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 3
 script = ExtResource("1_kyqiw")
 footstep_sounds = Array[AudioStream]([ExtResource("2_bhhdu"), ExtResource("3_megsn"), ExtResource("4_yoq75"), ExtResource("5_megsn")])
 
@@ -94,8 +95,8 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7)
-shape = SubResource("CircleShape2D_pbj7x")
+position = Vector2(0.375, -5)
+shape = SubResource("RectangleShape2D_megsn")
 
 [node name="flashlight" type="PointLight2D" parent="."]
 position = Vector2(0, -7)
@@ -109,11 +110,11 @@ offset = Vector2(10, 0)
 texture_scale = 2.5
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(0, -7)
+color = Color(0.32748905, 0.24129501, 0.0002612537, 1)
 shadow_enabled = true
 texture = ExtResource("4_dewec")
-texture_scale = 0.36
+texture_scale = 0.1
 
 [node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.47

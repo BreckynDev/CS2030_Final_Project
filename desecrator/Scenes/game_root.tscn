@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0vwy8w03yq4t"]
+
+[ext_resource type="AudioStream" uid="uid://bluratr8jelkq" path="res://Assets/Music/Track 01.wav" id="1_283ij"]
+[ext_resource type="Script" uid="uid://dau87o8v1nhlf" path="res://Scenes/game_root.gd" id="1_mrnkn"]
+[ext_resource type="PackedScene" uid="uid://bp7rao7baiaud" path="res://Scenes/main_menu.tscn" id="1_y37ms"]
+[ext_resource type="PackedScene" uid="uid://c0muduq2tyr1b" path="res://Scenes/main_settings.tscn" id="3_mrnkn"]
+
+[node name="GameRoot" type="Node"]
+script = ExtResource("1_mrnkn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_283ij")
+volume_db = -5.073
+autoplay = true
+
+[node name="MainSettings" parent="." instance=ExtResource("3_mrnkn")]
+offset_left = -54.0
+offset_top = -2.0
+offset_right = -54.0
+offset_bottom = -2.0
+
+[node name="mainMenu" parent="." instance=ExtResource("1_y37ms")]
+offset_left = -56.0
+offset_top = -1.0
+offset_right = 4.0
+offset_bottom = -1.0
