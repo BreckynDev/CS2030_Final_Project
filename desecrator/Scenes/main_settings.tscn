@@ -1,0 +1,133 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0muduq2tyr1b"]
+
+[ext_resource type="Texture2D" uid="uid://bdb3f3cipvdcj" path="res://Assets/UI/Screenshot 2025-12-06 at 10.41.00 PM.png" id="1_mu47r"]
+[ext_resource type="Script" uid="uid://cdwc5bt77jr0" path="res://Scenes/main_settings.gd" id="1_rftnl"]
+[ext_resource type="FontFile" uid="uid://cdlfpun8wqdjt" path="res://Assets/Text/NotJamFaithless9/NotJamFaithless9.ttf" id="3_h1i4x"]
+
+[node name="Main_Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rftnl")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4443.0
+offset_top = -2494.0
+offset_right = -687.0886
+offset_bottom = -53.166992
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.4, 2.4)
+texture = ExtResource("1_mu47r")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 607.0
+offset_top = 113.0
+offset_right = -634.0
+offset_bottom = -493.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.007843138, 0.023529412, 0.3137255)
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 79.0
+offset_right = 152.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Back
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -489.0
+offset_top = -436.0
+offset_right = 501.0
+offset_bottom = -282.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.3347481, 0.04855506, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_h1i4x")
+theme_override_font_sizes/normal_font_size = 100
+text = "Controls
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -286.99994
+offset_top = -822.0
+offset_right = 32.44452
+offset_bottom = -759.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.8, 1.8)
+theme_override_colors/default_color = Color(0.30497646, 0.030118143, 0.054040387, 1)
+theme_override_colors/font_outline_color = Color(0.5412125, 0.033873893, 0.19107166, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "W, A, S, D ----> Movement"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -301.0
+offset_top = -690.0
+offset_right = 36.22223
+offset_bottom = -627.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.8, 1.8)
+theme_override_colors/default_color = Color(0.30497646, 0.030118143, 0.054040387, 1)
+theme_override_colors/font_outline_color = Color(0.5412125, 0.033873893, 0.19107166, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "SPACE ----> Toggle Flashligh"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch4p0tc667b2i"]
+[gd_scene load_steps=4 format=3 uid="uid://ch4p0tc667b2i"]
 
 [ext_resource type="Script" uid="uid://c2bdgr6u8t568" path="res://Scripts/digspot.gd" id="1_ik5uk"]
+[ext_resource type="FontFile" uid="uid://c1iiaiydmkfts" path="res://Assets/Text/pixelated.ttf" id="2_xpixa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_woo05"]
 radius = 21.0
 height = 42.0
 
-[node name="dig_zone" type="Area2D" groups=["DigZones"]]
+[node name="dig_zone" type="Area2D"]
 script = ExtResource("1_ik5uk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -17,3 +18,4 @@ offset_left = -2.0
 offset_top = 14.0
 offset_right = 2.0
 offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("2_xpixa")

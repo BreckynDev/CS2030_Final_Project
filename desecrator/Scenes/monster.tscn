@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://by1o1rxh5uwf6"]
+
+[ext_resource type="Script" uid="uid://db27viv4g7nsl" path="res://Scenes/monster.gd" id="1_i44lo"]
+[ext_resource type="Texture2D" uid="uid://cqnsro71rve4w" path="res://Assets/Monsters/Untitled (20).png" id="1_xhoai"]
+[ext_resource type="Script" uid="uid://21ubkglqb2jy" path="res://Scenes/HeartBeatArea.gd" id="3_hyvb2"]
+[ext_resource type="AudioStream" uid="uid://ceseycs6ay0y" path="res://Assets/Music/Sound Effects/Scary Breathing And Heartbeat Sound Effects  Hombre aterrado, respiración - efecto de sonido.mp3" id="4_ujuxu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bua6k"]
+atlas = ExtResource("1_xhoai")
+region = Rect2(0, 2639, 296, 377)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auidl"]
+atlas = ExtResource("1_xhoai")
+region = Rect2(296, 2639, 296, 377)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko0n3"]
+atlas = ExtResource("1_xhoai")
+region = Rect2(592, 2639, 296, 377)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyvb2"]
+atlas = ExtResource("1_xhoai")
+region = Rect2(0, 2060, 296, 515)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujuxu"]
+atlas = ExtResource("1_xhoai")
+region = Rect2(296, 2060, 296, 515)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyu0s"]
+atlas = ExtResource("1_xhoai")
+region = Rect2(592, 2060, 296, 515)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ks7b"]
+atlas = ExtResource("1_xhoai")
+region = Rect2(888, 2060, 296, 515)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yc8mp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bua6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auidl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko0n3")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyvb2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujuxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyu0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ks7b")
+}],
+"loop": true,
+"name": &"Teleport",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1mxyj"]
+radius = 7.0
+height = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hyvb2"]
+radius = 173.07224
+
+[node name="monster" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_i44lo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -35)
+scale = Vector2(0.20439184, 0.20439179)
+sprite_frames = SubResource("SpriteFrames_yc8mp")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.031854484
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -21)
+shape = SubResource("CapsuleShape2D_1mxyj")
+
+[node name="HeartbeatArea" type="Area2D" parent="."]
+position = Vector2(0, -20)
+script = ExtResource("3_hyvb2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HeartbeatArea"]
+shape = SubResource("CircleShape2D_hyvb2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HeartbeatArea/CollisionShape2D2"]
+stream = ExtResource("4_ujuxu")
+volume_db = 1.268
