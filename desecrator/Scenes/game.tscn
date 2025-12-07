@@ -1594,7 +1594,6 @@ sources/0 = SubResource("TileSetAtlasSource_wrm1d")
 [node name="Game" type="Node2D"]
 
 [node name="NightOverlay" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.07842701, 0.093032144, 0.19616127, 1)
 
 [node name="Floor" type="TileMapLayer" parent="."]
