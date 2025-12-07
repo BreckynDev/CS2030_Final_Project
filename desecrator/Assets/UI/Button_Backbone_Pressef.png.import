@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0sya8a34naii"
-path="res://.godot/imported/CompassArrow.png-fa2e4e2b2f731ed5c1df845eea8a67dd.ctex"
+uid="uid://bgoice42q8023"
+path="res://.godot/imported/Button_Backbone_Pressef.png-2a09f68fd8e2c69b3fb9670aae1c6fa1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/CompassArrow.png"
-dest_files=["res://.godot/imported/CompassArrow.png-fa2e4e2b2f731ed5c1df845eea8a67dd.ctex"]
+source_file="res://Assets/UI/Button_Backbone_Pressef.png"
+dest_files=["res://.godot/imported/Button_Backbone_Pressef.png-2a09f68fd8e2c69b3fb9670aae1c6fa1.ctex"]
 
 [params]
 

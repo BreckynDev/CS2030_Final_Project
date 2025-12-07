@@ -2,7 +2,7 @@ extends Area2D
 
 var player_in_range = false
 var player_ref = null
-@export var dug = false
+var dug = false
 var digProgress = 0
 var digGoal = 100
 var digStep = 10

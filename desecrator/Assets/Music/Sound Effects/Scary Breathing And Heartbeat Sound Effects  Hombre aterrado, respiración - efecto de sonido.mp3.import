@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ceseycs6ay0y"
+path="res://.godot/imported/Scary Breathing And Heartbeat Sound Effects  Hombre aterrado, respiración - efecto de sonido.mp3-d89cc140ec9615030eeb99f22c4ba8b4.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Sound Effects/Scary Breathing And Heartbeat Sound Effects  Hombre aterrado, respiración - efecto de sonido.mp3"
+dest_files=["res://.godot/imported/Scary Breathing And Heartbeat Sound Effects  Hombre aterrado, respiración - efecto de sonido.mp3-d89cc140ec9615030eeb99f22c4ba8b4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6csuewhpqtns"
-path="res://.godot/imported/Compass.png-5e060dd6d3a4a01a3d42114e6fada0ce.ctex"
+uid="uid://5plf14o2b6xi"
+path="res://.godot/imported/Gauge_Gore_Thick_Empty.png-f309146c9c8b2129752bc749f9f5aadd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/Compass.png"
-dest_files=["res://.godot/imported/Compass.png-5e060dd6d3a4a01a3d42114e6fada0ce.ctex"]
+source_file="res://Assets/UI/Gauge_Gore_Thick_Empty.png"
+dest_files=["res://.godot/imported/Gauge_Gore_Thick_Empty.png-f309146c9c8b2129752bc749f9f5aadd.ctex"]
 
 [params]
 
