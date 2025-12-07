@@ -6,7 +6,7 @@
 radius = 21.0
 height = 42.0
 
-[node name="dig_zone" type="Area2D"]
+[node name="dig_zone" type="Area2D" groups=["DigZones"]]
 script = ExtResource("1_ik5uk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -3,9 +3,11 @@ extends CharacterBody2D
 const SPEED = 100
 @onready var playerSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flashlight: PointLight2D = $flashlight
-@export var flashlightEnabled = true
 @onready var battery_bar = get_node("/root/Game/UI/BatteryBar")
 @onready var treasure_bar = get_node("/root/Game/UI/TreasureBar")
+
+@export var flashlightEnabled = true
+@export var flashlightToggled = true
 
 var treasureGoal = 100
 var treasure = 0
@@ -65,17 +67,21 @@ func _physics_process(delta: float) -> void:
 	velocity = newVelocity
 	move_and_slide()
 	
-	if flashlightEnabled:
-		flashlight.enabled = true
-		if batteryPower > 0:
-			batteryPower -= batteryDrain  * delta
-		if batteryPower <= 0:
-			batteryPower = 0
-			flashlightEnabled = false
-			flashlight.enabled = false
+	if flashlightToggled:
 		if flashlightEnabled:
-			flashlight.look_at(get_global_mouse_position())
+			flashlight.enabled = true
+			if batteryPower > 0:
+				batteryPower -= batteryDrain  * delta
+			if batteryPower <= 0:
+				batteryPower = 0
+				flashlightEnabled = false
+				flashlight.enabled = false
+			if flashlightEnabled:
+				flashlight.look_at(get_global_mouse_position())
+		else:
+			flashlight.enabled = false
 	else:
+		flashlightEnabled = false # Put this here, so that it will have to be turned back in sory
 		flashlight.enabled = false
 	
 	battery_bar.value = batteryPower
