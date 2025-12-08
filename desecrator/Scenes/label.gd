@@ -1,6 +1,6 @@
 extends Label
 
-@export var delay_seconds: float = 10.0
+@export var delay_seconds: float = 30.0
 @export var fade_duration: float = 1.0
 
 func _ready() -> void:

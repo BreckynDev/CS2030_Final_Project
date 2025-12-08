@@ -4,13 +4,14 @@ const SPEED = 100
 @onready var playerSprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flashlight: PointLight2D = $flashlight
 @export var flashlightEnabled = true
-@onready var battery_bar = get_node("/root/Game/UI/BatteryBar")
+
+
 @onready var treasure_bar = get_node("/root/Game/UI/TreasureBar")
+@export var treasureGoal = 100
+@export var treasure = 0
 
-var treasureGoal = 100
-var treasure = 0
-
-var batteryPower = 100
+@onready var battery_bar = get_node("/root/Game/UI/BatteryBar")
+@export var batteryPower = 125
 @export var batteryDrain := 5.0
 
 # Footstep sounds
@@ -26,15 +27,15 @@ var current_interactable = null
 
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")
-	var direction_y := Input.get_axis("move_up", "move_down")
-	
-	treasure_bar.value = treasure
+	var direction_y := Input.get_axis("move_up", "move_down")	
 	
 	#detecting if digging
 	if Input.is_action_pressed("dig") and current_interactable:
 		current_interactable.dig(get_physics_process_delta_time())
 	
 	footstep_timer -= delta
+	if treasure_bar:
+		treasure_bar.value = treasure
 	
 	# Flip sprite
 	if direction_x > 0:
@@ -77,8 +78,8 @@ func _physics_process(delta: float) -> void:
 			flashlight.look_at(get_global_mouse_position())
 	else:
 		flashlight.enabled = false
-	
-	battery_bar.value = batteryPower
+	if battery_bar:
+		battery_bar.value = batteryPower
 	
 	
 func _process(delta: float) -> void:
@@ -92,3 +93,7 @@ func play_footstep() -> void:
 		return
 	footstepPlayer.stream = footstep_sounds[randi() % footstep_sounds.size()]
 	footstepPlayer.play()
+
+
+func _on_exit_body_entered(body):
+	pass # Replace with function body.
