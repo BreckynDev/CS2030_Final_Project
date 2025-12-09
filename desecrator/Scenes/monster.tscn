@@ -1,11 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://by1o1rxh5uwf6"]
+[gd_scene load_steps=16 format=3 uid="uid://by1o1rxh5uwf6"]
 
 [ext_resource type="Script" uid="uid://db27viv4g7nsl" path="res://Scenes/monster.gd" id="1_i44lo"]
 [ext_resource type="Texture2D" uid="uid://cqnsro71rve4w" path="res://Assets/Monsters/Untitled (20).png" id="1_xhoai"]
 [ext_resource type="AudioStream" uid="uid://cm0a71p665lf0" path="res://Assets/Music/Sound Effects/rustling-grass-1-101282.mp3" id="2_auidl"]
-[ext_resource type="Script" uid="uid://21ubkglqb2jy" path="res://Scenes/HeartBeatArea.gd" id="3_hyvb2"]
 [ext_resource type="AudioStream" uid="uid://cfslwviw5veg5" path="res://Assets/Music/Sound Effects/rustling-grass-2-101283.mp3" id="3_ko0n3"]
-[ext_resource type="AudioStream" uid="uid://ceseycs6ay0y" path="res://Assets/Music/Sound Effects/Scary Breathing And Heartbeat Sound Effects  Hombre aterrado, respiración - efecto de sonido.mp3" id="4_ujuxu"]
 [ext_resource type="AudioStream" uid="uid://ccqjjy26sa2ni" path="res://Assets/Music/Sound Effects/walking-on-grass-363353.mp3" id="4_yc8mp"]
 [ext_resource type="AudioStream" uid="uid://byevb2wwx0278" path="res://Assets/Music/Sound Effects/rustling-grass-4-101281.mp3" id="5_1mxyj"]
 
@@ -71,39 +69,41 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1mxyj"]
-radius = 7.0
-height = 32.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hyvb2"]
-radius = 173.07224
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ks7b"]
+radius = 8.0
 
 [node name="monster" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_i44lo")
 footstep_sounds = Array[AudioStream]([ExtResource("2_auidl"), ExtResource("3_ko0n3"), ExtResource("4_yc8mp"), ExtResource("5_1mxyj")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, -35)
-scale = Vector2(0.20439184, 0.20439179)
+position = Vector2(0, -28)
+scale = Vector2(0.16575168, 0.16575162)
 sprite_frames = SubResource("SpriteFrames_yc8mp")
 animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.031854484
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -21)
-shape = SubResource("CapsuleShape2D_1mxyj")
+position = Vector2(2, -9)
+shape = SubResource("CircleShape2D_6ks7b")
 
-[node name="HeartbeatArea" type="Area2D" parent="."]
-position = Vector2(0, -20)
-script = ExtResource("3_hyvb2")
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 20.0
+path_postprocessing = 1
+simplify_path = true
+avoidance_enabled = true
+radius = 43.5
+time_horizon_agents = 1.52
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HeartbeatArea"]
-shape = SubResource("CircleShape2D_hyvb2")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HeartbeatArea/CollisionShape2D2"]
-stream = ExtResource("4_ujuxu")
-volume_db = 1.268
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
 
 [node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
