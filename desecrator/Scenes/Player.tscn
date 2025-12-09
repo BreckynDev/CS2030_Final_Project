@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cm34q1mmuo7ft"]
+[gd_scene load_steps=21 format=3 uid="uid://cm34q1mmuo7ft"]
 
 [ext_resource type="Script" uid="uid://cxwepihyxyqv4" path="res://Scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://poognktqd4p7" path="res://Assets/Character/Eris Esra's Character Template 4/16x16/16x16 Idle-Sheet.png" id="1_ymxaj"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://byevb2wwx0278" path="res://Assets/Music/Sound Effects/rustling-grass-4-101281.mp3" id="4_yoq75"]
 [ext_resource type="Texture2D" uid="uid://cec6b7byhnvhf" path="res://Assets/Light/flashlight copy.png" id="5_5ixxa"]
 [ext_resource type="AudioStream" uid="uid://ccqjjy26sa2ni" path="res://Assets/Music/Sound Effects/walking-on-grass-363353.mp3" id="5_megsn"]
+[ext_resource type="AudioStream" uid="uid://blmavk8uu21xe" path="res://Assets/Music/Sound Effects/digging20200426-125956_01-40420.mp3" id="10_yoq75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88kja"]
 atlas = ExtResource("1_ymxaj")
@@ -91,7 +92,7 @@ footstep_sounds = Array[AudioStream]([ExtResource("2_bhhdu"), ExtResource("3_meg
 position = Vector2(0.24999905, -13.750001)
 scale = Vector2(1.3749999, 1.3749999)
 sprite_frames = SubResource("SpriteFrames_t38ji")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -117,4 +118,6 @@ texture = ExtResource("4_dewec")
 texture_scale = 0.1
 
 [node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
-volume_db = -15.47
+
+[node name="digSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_yoq75")

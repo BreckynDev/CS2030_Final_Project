@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://gsv7nbjfsqyq"]
+[gd_scene load_steps=5 format=3 uid="uid://gsv7nbjfsqyq"]
 
-[ext_resource type="Script" uid="uid://b75mrim0sw67v" path="res://coin.gd" id="1_jgi06"]
+[ext_resource type="Script" uid="uid://b75mrim0sw67v" path="res://Scripts/coin.gd" id="1_jgi06"]
 [ext_resource type="Texture2D" uid="uid://c8x426rjeflmu" path="res://Assets/Battery and gold.png" id="2_g537i"]
+[ext_resource type="AudioStream" uid="uid://ckro7sm8shg21" path="res://Assets/Music/Sound Effects/retro-coin-1-236677.mp3" id="3_g537i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2p6v"]
 radius = 2.828427
@@ -16,5 +17,9 @@ shape = SubResource("CircleShape2D_h2p6v")
 texture = ExtResource("2_g537i")
 region_enabled = true
 region_rect = Rect2(45, 14, 6, 3)
+
+[node name="pickup" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g537i")
+volume_db = -10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

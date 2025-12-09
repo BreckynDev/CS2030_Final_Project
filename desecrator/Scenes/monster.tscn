@@ -1,9 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://by1o1rxh5uwf6"]
+[gd_scene load_steps=19 format=3 uid="uid://by1o1rxh5uwf6"]
 
 [ext_resource type="Script" uid="uid://db27viv4g7nsl" path="res://Scenes/monster.gd" id="1_i44lo"]
 [ext_resource type="Texture2D" uid="uid://cqnsro71rve4w" path="res://Assets/Monsters/Untitled (20).png" id="1_xhoai"]
+[ext_resource type="AudioStream" uid="uid://cm0a71p665lf0" path="res://Assets/Music/Sound Effects/rustling-grass-1-101282.mp3" id="2_auidl"]
 [ext_resource type="Script" uid="uid://21ubkglqb2jy" path="res://Scenes/HeartBeatArea.gd" id="3_hyvb2"]
+[ext_resource type="AudioStream" uid="uid://cfslwviw5veg5" path="res://Assets/Music/Sound Effects/rustling-grass-2-101283.mp3" id="3_ko0n3"]
 [ext_resource type="AudioStream" uid="uid://ceseycs6ay0y" path="res://Assets/Music/Sound Effects/Scary Breathing And Heartbeat Sound Effects  Hombre aterrado, respiración - efecto de sonido.mp3" id="4_ujuxu"]
+[ext_resource type="AudioStream" uid="uid://ccqjjy26sa2ni" path="res://Assets/Music/Sound Effects/walking-on-grass-363353.mp3" id="4_yc8mp"]
+[ext_resource type="AudioStream" uid="uid://byevb2wwx0278" path="res://Assets/Music/Sound Effects/rustling-grass-4-101281.mp3" id="5_1mxyj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bua6k"]
 atlas = ExtResource("1_xhoai")
@@ -77,6 +81,7 @@ radius = 173.07224
 [node name="monster" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_i44lo")
+footstep_sounds = Array[AudioStream]([ExtResource("2_auidl"), ExtResource("3_ko0n3"), ExtResource("4_yc8mp"), ExtResource("5_1mxyj")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -35)
@@ -100,3 +105,5 @@ shape = SubResource("CircleShape2D_hyvb2")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HeartbeatArea/CollisionShape2D2"]
 stream = ExtResource("4_ujuxu")
 volume_db = 1.268
+
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
