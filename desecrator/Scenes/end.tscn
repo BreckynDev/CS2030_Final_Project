@@ -3947,9 +3947,9 @@ texture_scale = 0.05
 
 [node name="Intro Text" type="Label" parent="."]
 offset_left = -74.0
-offset_top = -81.0
+offset_top = -69.0
 offset_right = 76.0
-offset_bottom = -62.0
+offset_bottom = -50.0
 theme_override_fonts/font = ExtResource("4_kx0vo")
 text = "Congrats, you escaped!"
 horizontal_alignment = 1
