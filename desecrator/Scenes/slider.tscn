@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyxa24nqc6yrv"]
+
+[ext_resource type="Script" uid="uid://dhoibxbqraqsx" path="res://h_slider.gd" id="1_ntijb"]
+
+[node name="Slider" type="HSlider"]
+offset_right = 150.0
+offset_bottom = 47.0
+scale = Vector2(2, 2)
+max_value = 1.0
+step = 0.001
+script = ExtResource("1_ntijb")
