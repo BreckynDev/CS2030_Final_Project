@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cm34q1mmuo7ft" path="res://Scenes/Player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://by1o1rxh5uwf6" path="res://Scenes/monster.tscn" id="2_rku1e"]
 [ext_resource type="Texture2D" uid="uid://bfawqiyyhvmo" path="res://Assets/Light/light.png" id="2_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://cn6053mx0iaxv" path="res://Scenes/compass.tscn" id="4_1phco"]
 [ext_resource type="PackedScene" uid="uid://ch4p0tc667b2i" path="res://Scenes/dig_zone.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://r8lbisamg5on" path="res://Scenes/battery.tscn" id="6_i6g32"]
 [ext_resource type="PackedScene" uid="uid://gsv7nbjfsqyq" path="res://Scenes/coin.tscn" id="7_h4fw4"]
@@ -12,7 +13,10 @@
 [ext_resource type="FontFile" uid="uid://c1iiaiydmkfts" path="res://Assets/Text/pixelated.ttf" id="10_o5yvi"]
 [ext_resource type="AudioStream" uid="uid://djwwtuds166ik" path="res://Assets/Music/Track 03.wav" id="10_rku1e"]
 [ext_resource type="Script" uid="uid://2bji18kcx6ca" path="res://Scenes/label.gd" id="11_rku1e"]
-[ext_resource type="Script" uid="uid://di3b4v15talmb" path="res://Scenes/exit.gd" id="13_rfjv2"]
+[ext_resource type="Script" path="res://Scenes/exit.gd" id="13_rfjv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1phco"]
+size = Vector2(79.5, 20)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rfjv2"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1146,28 +1150,40 @@ texture = ExtResource("1_ebmjs")
 25:6/0/z_index = 1
 1:7/0 = 0
 1:7/0/y_sort_origin = 15
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.17985916, -8, 8, -8, 8, 8, 0, 8)
 2:7/0 = 0
 2:7/0/y_sort_origin = 15
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -0.35971832, -8, -0.17985916, 8, -8, 8)
 3:7/0 = 0
 3:7/0/y_sort_origin = 15
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.17985916, -8, 8, -8, 8, 8, 0, 8)
 4:7/0 = 0
 4:7/0/y_sort_origin = 15
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -0.35971832, -8, -0.17985916, 8, -8, 8)
 5:7/0 = 0
 5:7/0/y_sort_origin = 15
+5:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.17985916, -8, 8, -8, 8, 8, 0, 8)
 6:7/0 = 0
 6:7/0/y_sort_origin = 15
+6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -0.35971832, -8, -0.17985916, 8, -8, 8)
 7:7/0 = 0
 7:7/0/y_sort_origin = 15
+7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.17985916, -8, 8, -8, 8, 8, 0, 8)
 8:7/0 = 0
 8:7/0/y_sort_origin = 15
+8:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -0.35971832, -8, -0.17985916, 8, -8, 8)
 9:7/0 = 0
 9:7/0/y_sort_origin = 15
+9:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.17985916, -8, 8, -8, 8, 8, 0, 8)
 10:7/0 = 0
 10:7/0/y_sort_origin = 15
+10:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -0.35971832, -8, -0.17985916, 8, -8, 8)
 11:7/0 = 0
 11:7/0/y_sort_origin = 15
+11:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.17985916, -8, 8, -8, 8, 8, 0, 8)
 12:7/0 = 0
 12:7/0/y_sort_origin = 15
+12:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -0.35971832, -8, -0.17985916, 8, -8, 8)
 14:7/0 = 0
 14:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.1475277, -8, 8, -8, 8, 8, 3.327385, 8)
 15:7/0 = 0
@@ -1921,10 +1937,22 @@ physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_1phco")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1phco"]
+light_mode = 1
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rku1e"]
 size = Vector2(124, 9.5)
 
 [node name="Game" type="Node2D"]
+
+[node name="Barriers" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Barriers"]
+z_index = 99
+position = Vector2(-1417, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriers/StaticBody2D"]
+shape = SubResource("RectangleShape2D_1phco")
 
 [node name="NightOverlay" type="CanvasModulate" parent="."]
 visible = false
@@ -1978,9 +2006,17 @@ y_sort_enabled = true
 y_sort_enabled = true
 position = Vector2(95, -46)
 
+[node name="Compass" parent="YSorted/Player" instance=ExtResource("4_1phco")]
+z_index = 99
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_1phco")
+position = Vector2(-16, -8)
+scale = Vector2(0.1, 0.1)
+
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 position = Vector2(1, -16)
 zoom = Vector2(6, 6)
+process_callback = 0
 limit_left = -1505
 limit_top = -1190
 limit_right = 1790
