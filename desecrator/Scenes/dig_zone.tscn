@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch4p0tc667b2i"]
+[gd_scene load_steps=10 format=3 uid="uid://ch4p0tc667b2i"]
 
 [ext_resource type="Script" uid="uid://c2bdgr6u8t568" path="res://Scripts/digspot.gd" id="1_ik5uk"]
 [ext_resource type="PackedScene" uid="uid://gsv7nbjfsqyq" path="res://Scenes/coin.tscn" id="2_epd7s"]
@@ -12,7 +12,10 @@
 radius = 21.0
 height = 42.0
 
-[node name="dig_zone" type="Area2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xxlbh"]
+light_mode = 1
+
+[node name="dig_zone" type="Area2D" groups=["DigZones"]]
 script = ExtResource("1_ik5uk")
 coin_scene = ExtResource("2_epd7s")
 pile_of_coins_scene = ExtResource("3_xxlbh")
@@ -26,6 +29,7 @@ gold_bar_rate = 5
 shape = SubResource("CapsuleShape2D_woo05")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+material = SubResource("CanvasItemMaterial_xxlbh")
 offset_left = -22.0
 offset_top = 18.0
 offset_right = 23.0
