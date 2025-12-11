@@ -21,9 +21,10 @@ coin_scene = ExtResource("2_epd7s")
 pile_of_coins_scene = ExtResource("3_xxlbh")
 gold_bar_scene = ExtResource("4_o15cn")
 battery_scene = ExtResource("5_awsns")
-coin_rate = 25
+coin_rate = 10
+pile_of_coins_rate = 10
 battery_rate = 50
-gold_bar_rate = 5
+gold_bar_rate = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_woo05")
