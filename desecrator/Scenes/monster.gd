@@ -10,6 +10,7 @@ var is_teleporting := false
 
 @export var player: Node2D
 @onready var monster: AnimatedSprite2D = $AnimatedSprite2D
+@export var catch_distance: float = 30.0
 
 @onready var footstepPlayer: AudioStreamPlayer2D = $FootstepPlayer
 @export var footstep_sounds: Array[AudioStream] = []
@@ -34,31 +35,27 @@ func _ready():
 			
 func is_in_flashlight() -> bool:
 	if not player.flashlightEnabled or flashlight == null:
-		print("Flashlight disabled or null")
 		return false
 	
 	# Check distance
 	var distance = global_position.distance_to(flashlight.global_position)
-	print("Distance to flashlight: ", distance, " | Max range: ", flashlight_range)
 	if distance > flashlight_range:
-		print("Too far!")
 		return false
 	
 	# Check angle - is monster within the flashlight cone?
 	var flashlight_direction = Vector2.RIGHT.rotated(flashlight.global_rotation)
 	var to_monster = (global_position - flashlight.global_position).normalized()
 	var angle = flashlight_direction.angle_to(to_monster)
-	var angle_degrees = rad_to_deg(abs(angle))
-	
-	print("Flashlight rotation: ", rad_to_deg(flashlight.global_rotation))
-	print("Angle to monster: ", angle_degrees, " | Max cone angle: ", flashlight_cone_angle)
 	
 	# Convert cone angle to radians and check if within cone
 	var in_cone = abs(angle) <= deg_to_rad(flashlight_cone_angle)
-	print("In cone: ", in_cone)
 	return in_cone
 	
 func _physics_process(delta: float) -> void:
+	if global_position.distance_to(player.global_position) < catch_distance:
+		game_over()
+		return
+		
 	if is_in_flashlight():
 		velocity = Vector2.ZERO
 		monster.animation = "Idle" 
@@ -133,3 +130,19 @@ func teleport_monster():
 	is_teleporting = false
 	monster.animation = "Idle"
 	monster.play()
+
+func game_over():
+	get_tree().paused = true
+	if player.has_node("AnimatedSprite2D"):
+		var player_sprite = player.get_node("AnimatedSprite2D")
+		player_sprite.process_mode = Node.PROCESS_MODE_ALWAYS
+		player_sprite.play("death")
+		
+	if player.has_node("DeathSound"):
+		var death_sound = player.get_node("DeathSound")
+		death_sound.play()
+
+	await get_tree().create_timer(2.0, true, false, true).timeout # 2 seconds - adjust as needed
+	
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")

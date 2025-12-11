@@ -3,7 +3,7 @@ extends AudioStreamPlayer
 @export var song1: AudioStream
 @export var song2: AudioStream
 
-var current_song: int = 0 
+var current_song: int = 1
 
 func _ready():
 	finished.connect(_on_song_finished)
