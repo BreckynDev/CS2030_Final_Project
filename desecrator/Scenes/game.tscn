@@ -1,4 +1,4 @@
-gd_scene load_steps=63 format=4 uid="uid://bydkswc1ecpbd"]
+[gd_scene load_steps=63 format=4 uid="uid://bydkswc1ecpbd"]
 
 [ext_resource type="Texture2D" uid="uid://tnrlmn60h5ae" path="res://Assets/Graveyard/Graveyard_Set.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://cm34q1mmuo7ft" path="res://Scenes/Player.tscn" id="2_qxrlw"]
