@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4xk1yh84m3qw"]
+
+[ext_resource type="Script" uid="uid://b2mjf02knb5ai" path="res://Scenes/game_over.gd" id="1_8fo1c"]
+[ext_resource type="FontFile" uid="uid://cdlfpun8wqdjt" path="res://Assets/Text/NotJamFaithless9/NotJamFaithless9.ttf" id="1_ojehl"]
+
+[node name="gameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8fo1c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -61.0
+offset_right = 42.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.007843138, 0.023529412, 1)
+
+[node name="Menu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 206.0
+offset_right = 150.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Menu
+"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 337.0
+offset_right = 150.0
+offset_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "QUIT"
+
+[node name="Settings" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -459.0
+offset_top = -438.0
+offset_right = 531.0
+offset_bottom = -284.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.3347481, 0.04855506, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_ojehl")
+theme_override_font_sizes/normal_font_size = 100
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
