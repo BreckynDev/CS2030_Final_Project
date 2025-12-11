@@ -159,5 +159,5 @@ bus = &"SFX"
 stream = ExtResource("10_yoq75")
 bus = &"SFX"
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+[node name="DmgSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_glx4g")

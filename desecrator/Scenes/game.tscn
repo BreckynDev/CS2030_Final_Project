@@ -13,7 +13,7 @@
 [ext_resource type="FontFile" uid="uid://c1iiaiydmkfts" path="res://Assets/Text/pixelated.ttf" id="10_o5yvi"]
 [ext_resource type="AudioStream" uid="uid://c6tq2pi3iqvf1" path="res://Assets/Music/haunted ambiences.mp3" id="11_1phco"]
 [ext_resource type="Script" uid="uid://2bji18kcx6ca" path="res://Scenes/label.gd" id="11_rku1e"]
-[ext_resource type="Script" path="res://Scenes/exit.gd" id="13_rfjv2"]
+[ext_resource type="Script" uid="uid://di3b4v15talmb" path="res://Scenes/exit.gd" id="13_rfjv2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1phco"]
 size = Vector2(79.5, 20)

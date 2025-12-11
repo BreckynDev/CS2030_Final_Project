@@ -17,6 +17,7 @@ const SPEED = 100
 
 @onready var health_bar = get_node("/root/Game/UI/Health")
 @export var health = 100
+@onready var dmg_sound: AudioStreamPlayer = $DmgSound
 
 # Footstep sounds
 @onready var footstepPlayer: AudioStreamPlayer2D = $FootstepPlayer
@@ -37,11 +38,9 @@ func game_over():
 		var player_sprite = $"AnimatedSprite2D"
 		player_sprite.process_mode = Node.PROCESS_MODE_ALWAYS
 		player_sprite.play("death")
-		
-	if $"DeathSound":
-		var death_sound = $"DeathSound"
-		death_sound.play()
 
+	dmg_sound.play()
+		
 	await get_tree().create_timer(2.0, true, false, true).timeout # 2 seconds - adjust as needed
 	
 	get_tree().paused = false
@@ -52,6 +51,7 @@ func screenShake(delta): # holy moly this actually works really well lol
 	camShakePower = max(camShakePower - camShakeDecay * delta, 0)
 
 func takeDamage(dmg):
+	dmg_sound.play()
 	health -= dmg
 	camShakePower = 10
 	if (health <= 0):

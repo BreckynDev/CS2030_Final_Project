@@ -70,19 +70,25 @@ func _physics_process(delta: float) -> void:
 		#monster.stop()        
 		#return
 		
-	monster.play()
-	var next_point = nav_agent.get_next_path_position()
-	var direction = global_position.direction_to(next_point)
-	velocity = direction * SPEED
+	#monster.play()
+	#var next_point = nav_agent.get_next_path_position()
+	#var direction = global_position.direction_to(next_point)
+	#velocity = direction * SPEED
 	if is_in_flashlight():
-		velocity = velocity * ((flashStunLength - flashStunTimer) / flashStunLength)
+		velocity = Vector2.ZERO
+		monster.animation = "Idle"
+		monster.stop()
 		flashStunTimer += delta
-		print(flashStunTimer)
+		#velocity = velocity * ((flashStunLength - flashStunTimer) / flashStunLength)
 		if flashStunTimer >= flashStunLength:
 			teleport_monster()
 
 	else:
 		flashStunTimer = max(flashStunTimer - delta, 0)
+		monster.play()
+		var next_point = nav_agent.get_next_path_position()
+		var direction = global_position.direction_to(next_point)
+		velocity = direction * SPEED
 	move_and_slide()
 	
 	footstep_timer -= delta
