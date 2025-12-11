@@ -13,7 +13,7 @@
 [ext_resource type="FontFile" uid="uid://c1iiaiydmkfts" path="res://Assets/Text/pixelated.ttf" id="10_o5yvi"]
 [ext_resource type="AudioStream" uid="uid://c6tq2pi3iqvf1" path="res://Assets/Music/haunted ambiences.mp3" id="11_1phco"]
 [ext_resource type="Script" uid="uid://2bji18kcx6ca" path="res://Scenes/label.gd" id="11_rku1e"]
-[ext_resource type="Script" uid="uid://di3b4v15talmb" path="res://Scenes/exit.gd" id="13_rfjv2"]
+[ext_resource type="Script" path="res://Scenes/exit.gd" id="13_rfjv2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1phco"]
 size = Vector2(79.5, 20)
@@ -1933,7 +1933,8 @@ texture = ExtResource("1_ebmjs")
 
 [sub_resource type="TileSet" id="TileSet_3dryh"]
 occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_1phco")
 
@@ -1955,6 +1956,7 @@ position = Vector2(-1417, 102)
 shape = SubResource("RectangleShape2D_1phco")
 
 [node name="NightOverlay" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0, 0.047557704, 0.12358757, 1)
 
 [node name="Floor" type="TileMapLayer" parent="." groups=["navigation"]]
@@ -1998,12 +2000,28 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Treasure Found"
 
+[node name="Health" type="ProgressBar" parent="UI"]
+modulate = Color(1, 0.015686275, 0, 1)
+offset_left = 332.0
+offset_top = 10.0
+offset_right = 632.0
+offset_bottom = 60.0
+step = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI/Health"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Health"
+
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Player" parent="YSorted" instance=ExtResource("2_qxrlw")]
 y_sort_enabled = true
 position = Vector2(95, -46)
+collision_mask = 1
 
 [node name="Compass" parent="YSorted/Player" instance=ExtResource("4_1phco")]
 z_index = 99
@@ -2024,6 +2042,7 @@ position_smoothing_enabled = true
 
 [node name="Monster" parent="YSorted" node_paths=PackedStringArray("player") instance=ExtResource("2_rku1e")]
 position = Vector2(-283, 422)
+collision_mask = 2
 player = NodePath("../Player")
 teleport_points_parent_path = NodePath("../../TeleportPoints")
 
@@ -2999,7 +3018,7 @@ dirt  mounds
 horizontal_alignment = 1
 script = ExtResource("11_rku1e")
 
-[node name="Exit" type="Area2D" parent="."]
+[node name="Exit" type="Area2D" parent="." groups=["Exit"]]
 position = Vector2(-1128, -1127)
 script = ExtResource("13_rfjv2")
 

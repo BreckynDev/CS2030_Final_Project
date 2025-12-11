@@ -5,6 +5,7 @@ const SPEED = 100
 @onready var flashlight: PointLight2D = $flashlight
 @export var flashlightEnabled = true
 
+@onready var current_camera : Camera2D = get_viewport().get_camera_2d()
 
 @onready var treasure_bar = get_node("/root/Game/UI/TreasureBar")
 @export var treasureGoal = 100
@@ -13,6 +14,9 @@ const SPEED = 100
 @onready var battery_bar = get_node("/root/Game/UI/BatteryBar")
 @export var batteryPower = 125
 @export var batteryDrain := 5.0
+
+@onready var health_bar = get_node("/root/Game/UI/Health")
+@export var health = 100
 
 # Footstep sounds
 @onready var footstepPlayer: AudioStreamPlayer2D = $FootstepPlayer
@@ -24,6 +28,18 @@ var footstep_timer := 0.0
 
 #digging
 var current_interactable = null
+var camShakePower = 0
+var camShakeDecay = 10
+
+func screenShake(delta): # holy moly this actually works really well lol
+	current_camera.offset = Vector2(randf_range(-camShakePower, camShakePower),randf_range(-camShakePower, camShakePower))
+	camShakePower = max(camShakePower - camShakeDecay * delta, 0)
+
+func takeDamage(dmg):
+	health -= dmg
+	camShakePower = 10
+	if (health <= 0):
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")
@@ -36,6 +52,8 @@ func _physics_process(delta: float) -> void:
 	footstep_timer -= delta
 	if treasure_bar:
 		treasure_bar.value = treasure
+	if health_bar:
+		health_bar.value = health
 	
 	# Flip sprite
 	if direction_x > 0:
@@ -80,6 +98,7 @@ func _physics_process(delta: float) -> void:
 		flashlight.enabled = false
 	if battery_bar:
 		battery_bar.value = batteryPower
+	screenShake(delta)
 	
 	
 func _process(delta: float) -> void:
