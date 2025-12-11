@@ -17,6 +17,7 @@ const SPEED = 100
 
 @onready var health_bar = get_node("/root/Game/UI/Health")
 @export var health = 100
+@onready var dmg_sound: AudioStreamPlayer = $DmgSound
 
 # Footstep sounds
 @onready var footstepPlayer: AudioStreamPlayer2D = $FootstepPlayer
@@ -31,15 +32,30 @@ var current_interactable = null
 var camShakePower = 0
 var camShakeDecay = 10
 
+func game_over():
+	get_tree().paused = true
+	if $"AnimatedSprite2D":
+		var player_sprite = $"AnimatedSprite2D"
+		player_sprite.process_mode = Node.PROCESS_MODE_ALWAYS
+		player_sprite.play("death")
+
+	dmg_sound.play()
+		
+	await get_tree().create_timer(2.0, true, false, true).timeout # 2 seconds - adjust as needed
+	
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+
 func screenShake(delta): # holy moly this actually works really well lol
 	current_camera.offset = Vector2(randf_range(-camShakePower, camShakePower),randf_range(-camShakePower, camShakePower))
 	camShakePower = max(camShakePower - camShakeDecay * delta, 0)
 
 func takeDamage(dmg):
+	dmg_sound.play()
 	health -= dmg
 	camShakePower = 10
 	if (health <= 0):
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+		game_over()
 
 func _physics_process(delta: float) -> void:
 	var direction_x := Input.get_axis("move_left", "move_right")

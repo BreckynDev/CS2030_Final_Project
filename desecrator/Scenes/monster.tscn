@@ -76,6 +76,11 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_i44lo")
+catch_distance = null
+footstep_sounds = null
+teleport_points_parent_path = null
+flashlight_range = null
+flashlight_cone_angle = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -42)
@@ -83,6 +88,7 @@ scale = Vector2(0.16575168, 0.16575162)
 sprite_frames = SubResource("SpriteFrames_yc8mp")
 animation = &"teleport"
 autoplay = "Idle"
+frame_progress = 0.9092509
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visibility_layer = 33
