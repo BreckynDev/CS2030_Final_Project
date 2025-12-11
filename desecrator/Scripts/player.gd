@@ -15,8 +15,9 @@ const SPEED = 100
 @export var batteryPower = 125
 @export var batteryDrain := 5.0
 
-@onready var health_bar = get_node("/root/Game/UI/Health")
+@onready var health_bar = get_node("/root/Game/UI/HealthBar")
 @export var health = 100
+
 @onready var dmg_sound: AudioStreamPlayer = $DmgSound
 
 # Footstep sounds

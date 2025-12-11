@@ -1,12 +1,17 @@
-[gd_scene load_steps=63 format=4 uid="uid://bydkswc1ecpbd"]
+[gd_scene load_steps=68 format=4 uid="uid://bydkswc1ecpbd"]
 
 [ext_resource type="Texture2D" uid="uid://tnrlmn60h5ae" path="res://Assets/Graveyard/Graveyard_Set.png" id="1_ebmjs"]
+[ext_resource type="Texture2D" uid="uid://nso1l8j488s2" path="res://Assets/UI/Progress Bars/GUI-Kit-Pack-Free_23.png" id="2_iivbl"]
 [ext_resource type="PackedScene" uid="uid://cm34q1mmuo7ft" path="res://Scenes/Player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://by1o1rxh5uwf6" path="res://Scenes/monster.tscn" id="2_rku1e"]
 [ext_resource type="Texture2D" uid="uid://bfawqiyyhvmo" path="res://Assets/Light/light.png" id="2_wrm1d"]
+[ext_resource type="Texture2D" uid="uid://dg5ry5b8bnk44" path="res://Assets/UI/Progress Bars/GUI-Kit-Pack-Free_11.png" id="3_7nbq1"]
 [ext_resource type="PackedScene" uid="uid://cn6053mx0iaxv" path="res://Scenes/compass.tscn" id="4_1phco"]
+[ext_resource type="Texture2D" uid="uid://brpcuc0x403mv" path="res://Assets/UI/Progress Bars/GUI-Kit-Pack-Free_32.png" id="4_exi56"]
+[ext_resource type="Texture2D" uid="uid://cm3h7afhvu7a6" path="res://Assets/UI/Progress Bars/GUI-Kit-Pack-Free_35.png" id="5_7t8sx"]
 [ext_resource type="PackedScene" uid="uid://ch4p0tc667b2i" path="res://Scenes/dig_zone.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://r8lbisamg5on" path="res://Scenes/battery.tscn" id="6_i6g32"]
+[ext_resource type="Texture2D" uid="uid://btefphuhi5emu" path="res://Assets/UI/Progress Bars/GUI-Kit-Pack-Free_54.png" id="6_mg4q0"]
 [ext_resource type="PackedScene" uid="uid://gsv7nbjfsqyq" path="res://Scenes/coin.tscn" id="7_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://ucmeka4v7i52" path="res://Scenes/gold_bar.tscn" id="8_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://cqepnglfe7w1j" path="res://Scenes/pile_of_coins.tscn" id="9_o5yvi"]
@@ -1968,7 +1973,68 @@ tile_set = SubResource("TileSet_3dryh")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="BatteryBar" type="ProgressBar" parent="UI"]
+[node name="HealthBar" type="TextureProgressBar" parent="UI"]
+offset_left = 19.0
+offset_top = 50.0
+offset_right = 284.0
+offset_bottom = 97.0
+value = 100.0
+texture_under = ExtResource("2_iivbl")
+texture_progress = ExtResource("3_7nbq1")
+
+[node name="Label" type="Label" parent="UI/HealthBar"]
+layout_mode = 0
+offset_left = 2.1428604
+offset_top = -22.142859
+offset_right = 54.14286
+offset_bottom = 0.8571415
+text = "Health"
+
+[node name="BatteryBar" type="TextureProgressBar" parent="UI"]
+offset_left = 20.0
+offset_top = 133.0
+offset_right = 293.0
+offset_bottom = 189.0
+max_value = 125.0
+value = 125.0
+texture_under = ExtResource("2_iivbl")
+texture_progress = ExtResource("4_exi56")
+tint_under = Color(1, 1, 1, 0.7058824)
+tint_progress = Color(0.95094126, 1, 0.65026766, 0.7058824)
+
+[node name="Label" type="Label" parent="UI/BatteryBar"]
+layout_mode = 0
+offset_left = 2.8571472
+offset_top = -22.857141
+offset_right = 113.85715
+offset_bottom = 0.1428585
+text = "Flashlight Charge"
+
+[node name="TreasureBar" type="TextureProgressBar" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1896.0
+offset_top = -865.0
+offset_right = -1623.0
+offset_bottom = -809.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_under = ExtResource("5_7t8sx")
+texture_progress = ExtResource("6_mg4q0")
+
+[node name="Label" type="Label" parent="UI/TreasureBar"]
+layout_mode = 0
+offset_left = 2.1428833
+offset_top = -28.57143
+offset_right = 74.28583
+offset_bottom = -5.57143
+text = "Treasure"
+
+[node name="Battery" type="ProgressBar" parent="UI"]
+visible = false
 modulate = Color(0.8718738, 0.762161, 0.08069853, 1)
 offset_left = 10.0
 offset_top = 10.0
@@ -1978,13 +2044,8 @@ max_value = 125.0
 step = 1.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="UI/BatteryBar"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Battery Power"
-
-[node name="TreasureBar" type="ProgressBar" parent="UI"]
+[node name="Treasure" type="ProgressBar" parent="UI"]
+visible = false
 modulate = Color(0.08430805, 0.771712, 0.3360653, 1)
 offset_left = 10.0
 offset_top = 75.0
@@ -1993,13 +2054,8 @@ offset_bottom = 125.0
 step = 1.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="UI/TreasureBar"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Treasure Found"
-
 [node name="Health" type="ProgressBar" parent="UI"]
+visible = false
 modulate = Color(1, 0.015686275, 0, 1)
 offset_left = 332.0
 offset_top = 10.0
@@ -2007,12 +2063,6 @@ offset_right = 632.0
 offset_bottom = 60.0
 step = 1.0
 show_percentage = false
-
-[node name="Label" type="Label" parent="UI/Health"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Health"
 
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -2111,6 +2161,7 @@ texture = ExtResource("2_wrm1d")
 texture_scale = 0.15
 
 [node name="Lamp2" type="PointLight2D" parent="YSorted/Lights/Lights/Lamp"]
+visible = false
 position = Vector2(456, 149)
 scale = Vector2(7.488344, 4.9365273)
 color = Color(0.78039217, 0.4392157, 0, 1)
@@ -2118,6 +2169,7 @@ texture = ExtResource("2_wrm1d")
 texture_scale = 0.15
 
 [node name="Lamp3" type="PointLight2D" parent="YSorted/Lights/Lights/Lamp"]
+visible = false
 position = Vector2(454.99997, -266)
 scale = Vector2(7.81523, 5.6282616)
 color = Color(0.78039217, 0.4392157, 0, 1)
