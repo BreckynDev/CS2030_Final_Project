@@ -22,7 +22,7 @@ var hitTimer = 0
 var canHit = true
 
 var flashStunTimer = 0
-var flashStunLength = 2
+var flashStunLength = 1.5
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @export_node_path var teleport_points_parent_path: NodePath
@@ -156,19 +156,3 @@ func teleport_monster():
 	flashStunTimer = 0
 	monster.animation = "Idle"
 	monster.play()
-
-func game_over():
-	get_tree().paused = true
-	if player.has_node("AnimatedSprite2D"):
-		var player_sprite = player.get_node("AnimatedSprite2D")
-		player_sprite.process_mode = Node.PROCESS_MODE_ALWAYS
-		player_sprite.play("death")
-		
-	if player.has_node("DeathSound"):
-		var death_sound = player.get_node("DeathSound")
-		death_sound.play()
-
-	await get_tree().create_timer(2.0, true, false, true).timeout # 2 seconds - adjust as needed
-	
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
