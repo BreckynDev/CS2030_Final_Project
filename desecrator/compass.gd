@@ -27,6 +27,8 @@ func getNearestObject():
 		if dist < shortest:
 			shortest = dist
 			nearest = obj
+	if !nearest:
+		nearest = get_tree().get_first_node_in_group("Exit")
 	return nearest
 
 

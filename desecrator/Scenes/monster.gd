@@ -10,17 +10,25 @@ var is_teleporting := false
 
 @export var player: Node2D
 @onready var monster: AnimatedSprite2D = $AnimatedSprite2D
+@export var catch_distance: float = 30.0
 
 @onready var footstepPlayer: AudioStreamPlayer2D = $FootstepPlayer
 @export var footstep_sounds: Array[AudioStream] = []
 var footstep_cooldown := 0.8
 var footstep_timer := 0.0
 
+var hitCooldown = 3
+var hitTimer = 0
+var canHit = true
+
+var flashStunTimer = 0
+var flashStunLength = 2
+
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @export_node_path var teleport_points_parent_path: NodePath
 
 @onready var flashlight: PointLight2D = $"../Player/flashlight"
-@export var flashlight_range: float = 400.0
+@export var flashlight_range: float = 125.0
 @export var flashlight_cone_angle: float = 45.0 
 
 func _ready():
@@ -34,14 +42,11 @@ func _ready():
 			
 func is_in_flashlight() -> bool:
 	if not player.flashlightEnabled or flashlight == null:
-		print("Flashlight disabled or null")
 		return false
 	
 	# Check distance
 	var distance = global_position.distance_to(flashlight.global_position)
-	print("Distance to flashlight: ", distance, " | Max range: ", flashlight_range)
 	if distance > flashlight_range:
-		print("Too far!")
 		return false
 	
 	# Check angle - is monster within the flashlight cone?
@@ -50,31 +55,48 @@ func is_in_flashlight() -> bool:
 	var angle = flashlight_direction.angle_to(to_monster)
 	var angle_degrees = rad_to_deg(abs(angle))
 	
-	print("Flashlight rotation: ", rad_to_deg(flashlight.global_rotation))
-	print("Angle to monster: ", angle_degrees, " | Max cone angle: ", flashlight_cone_angle)
+	#print("Flashlight rotation: ", rad_to_deg(flashlight.global_rotation))
+	#print("Angle to monster: ", angle_degrees, " | Max cone angle: ", flashlight_cone_angle)
 	
 	# Convert cone angle to radians and check if within cone
 	var in_cone = abs(angle) <= deg_to_rad(flashlight_cone_angle)
-	print("In cone: ", in_cone)
+	#print("In cone: ", in_cone)
 	return in_cone
 	
 func _physics_process(delta: float) -> void:
-	if is_in_flashlight():
-		velocity = Vector2.ZERO
-		monster.animation = "Idle" 
-		monster.stop()        
-		return
+	#if is_in_flashlight():
+		#velocity = Vector2.ZERO
+		#monster.animation = "Idle" 
+		#monster.stop()        
+		#return
 		
 	monster.play()
 	var next_point = nav_agent.get_next_path_position()
 	var direction = global_position.direction_to(next_point)
 	velocity = direction * SPEED
+	if is_in_flashlight():
+		velocity = velocity * ((flashStunLength - flashStunTimer) / flashStunLength)
+		flashStunTimer += delta
+		print(flashStunTimer)
+		if flashStunTimer >= flashStunLength:
+			teleport_monster()
+
+	else:
+		flashStunTimer = max(flashStunTimer - delta, 0)
 	move_and_slide()
 	
 	footstep_timer -= delta
 	if footstep_timer <= 0:
 			play_footstep()
 			footstep_timer = footstep_cooldown
+	
+	hitTimer -= delta
+	var playerDist = global_position.distance_to(player.global_position)
+	if playerDist < 25 and hitTimer <= 0: # Do damage and stuff.
+		teleport_monster()
+		player.takeDamage(25)
+		hitTimer = hitCooldown
+		
 	
 	if not is_teleporting:
 		var current_distance = global_position.distance_to(player.global_position)
@@ -131,5 +153,22 @@ func teleport_monster():
 	velocity = Vector2.ZERO
 	
 	is_teleporting = false
+	flashStunTimer = 0
 	monster.animation = "Idle"
 	monster.play()
+
+func game_over():
+	get_tree().paused = true
+	if player.has_node("AnimatedSprite2D"):
+		var player_sprite = player.get_node("AnimatedSprite2D")
+		player_sprite.process_mode = Node.PROCESS_MODE_ALWAYS
+		player_sprite.play("death")
+		
+	if player.has_node("DeathSound"):
+		var death_sound = player.get_node("DeathSound")
+		death_sound.play()
+
+	await get_tree().create_timer(2.0, true, false, true).timeout # 2 seconds - adjust as needed
+	
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
