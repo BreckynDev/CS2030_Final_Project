@@ -5,7 +5,7 @@ var player_ref = null
 var dug = false
 var digProgress = 0
 var digGoal = 100
-var digStep = 10
+var digStep = 25
 
 @onready var dropNoise: AudioStreamPlayer2D = $dropNoise
 

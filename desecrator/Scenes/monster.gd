@@ -17,11 +17,18 @@ var is_teleporting := false
 var footstep_cooldown := 0.8
 var footstep_timer := 0.0
 
+var hitCooldown = 3
+var hitTimer = 0
+var canHit = true
+
+var flashStunTimer = 0
+var flashStunLength = 2
+
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @export_node_path var teleport_points_parent_path: NodePath
 
 @onready var flashlight: PointLight2D = $"../Player/flashlight"
-@export var flashlight_range: float = 400.0
+@export var flashlight_range: float = 125.0
 @export var flashlight_cone_angle: float = 45.0 
 
 func _ready():
@@ -46,32 +53,50 @@ func is_in_flashlight() -> bool:
 	var flashlight_direction = Vector2.RIGHT.rotated(flashlight.global_rotation)
 	var to_monster = (global_position - flashlight.global_position).normalized()
 	var angle = flashlight_direction.angle_to(to_monster)
+	var angle_degrees = rad_to_deg(abs(angle))
+	
+	#print("Flashlight rotation: ", rad_to_deg(flashlight.global_rotation))
+	#print("Angle to monster: ", angle_degrees, " | Max cone angle: ", flashlight_cone_angle)
 	
 	# Convert cone angle to radians and check if within cone
 	var in_cone = abs(angle) <= deg_to_rad(flashlight_cone_angle)
+	#print("In cone: ", in_cone)
 	return in_cone
 	
 func _physics_process(delta: float) -> void:
-	if global_position.distance_to(player.global_position) < catch_distance:
-		game_over()
-		return
-		
-	if is_in_flashlight():
-		velocity = Vector2.ZERO
-		monster.animation = "Idle" 
-		monster.stop()        
-		return
+	#if is_in_flashlight():
+		#velocity = Vector2.ZERO
+		#monster.animation = "Idle" 
+		#monster.stop()        
+		#return
 		
 	monster.play()
 	var next_point = nav_agent.get_next_path_position()
 	var direction = global_position.direction_to(next_point)
 	velocity = direction * SPEED
+	if is_in_flashlight():
+		velocity = velocity * ((flashStunLength - flashStunTimer) / flashStunLength)
+		flashStunTimer += delta
+		print(flashStunTimer)
+		if flashStunTimer >= flashStunLength:
+			teleport_monster()
+
+	else:
+		flashStunTimer = max(flashStunTimer - delta, 0)
 	move_and_slide()
 	
 	footstep_timer -= delta
 	if footstep_timer <= 0:
 			play_footstep()
 			footstep_timer = footstep_cooldown
+	
+	hitTimer -= delta
+	var playerDist = global_position.distance_to(player.global_position)
+	if playerDist < 25 and hitTimer <= 0: # Do damage and stuff.
+		teleport_monster()
+		player.takeDamage(25)
+		hitTimer = hitCooldown
+		
 	
 	if not is_teleporting:
 		var current_distance = global_position.distance_to(player.global_position)
@@ -128,6 +153,7 @@ func teleport_monster():
 	velocity = Vector2.ZERO
 	
 	is_teleporting = false
+	flashStunTimer = 0
 	monster.animation = "Idle"
 	monster.play()
 

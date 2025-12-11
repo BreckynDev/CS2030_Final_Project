@@ -85,6 +85,7 @@ animation = &"teleport"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 33
 position = Vector2(0, -18)
 shape = SubResource("CircleShape2D_6ks7b")
 
