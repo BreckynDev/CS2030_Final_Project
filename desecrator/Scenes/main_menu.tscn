@@ -15,12 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_28flt")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect2"]
 layout_mode = 1
@@ -29,10 +24,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -2129.0
-offset_top = -1443.0
-offset_right = -302.64587
-offset_bottom = -247.24982
+offset_left = -1147.0
+offset_top = -911.0
+offset_right = 679.3541
+offset_bottom = 284.75024
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.4, 2.4)
