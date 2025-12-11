@@ -92,6 +92,10 @@ func play_footstep() -> void:
 	if footstep_sounds.size() == 0:
 		return
 	footstepPlayer.stream = footstep_sounds[randi() % footstep_sounds.size()]
+	
+	var randomPitch := RandomNumberGenerator.new()
+	footstepPlayer.pitch_scale = randomPitch.randf_range(0.9, 1.1)
+	
 	footstepPlayer.play()
 
 

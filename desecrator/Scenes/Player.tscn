@@ -118,6 +118,8 @@ texture = ExtResource("4_dewec")
 texture_scale = 0.1
 
 [node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [node name="digSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_yoq75")
+bus = &"SFX"
