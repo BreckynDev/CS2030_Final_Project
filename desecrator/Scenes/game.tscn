@@ -1961,7 +1961,6 @@ position = Vector2(-1417, 102)
 shape = SubResource("RectangleShape2D_1phco")
 
 [node name="NightOverlay" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.05203811, 0.08624009, 0.19310006, 1)
 
 [node name="Floor" type="TileMapLayer" parent="." groups=["navigation"]]
